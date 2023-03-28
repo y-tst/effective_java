@@ -1,4 +1,25 @@
+***********************************************************************
 
+The CacheService class includes two methods:
+get and put for retrieving and adding entries respectively.
+It also schedules the eviction of expired entries in the background
+by calling evictExpiredEntries() every EVICTION_INTERVAL_SEC seconds
+using a ScheduledExecutorService.
+
+The cache service also keeps track of the total number of evictions
+and the average time spent putting new entries into the cache.
+These are implemented using the evictions and totalPutTime AtomicInteger
+and AtomicLong fields respectively.
+
+************************************************************************
+
+________________________________________________________________________
+
+The cache service also supports the addition and removal
+of removal listeners using the addRemovalListener
+and removeRemovalListener methods.
+These listeners are called when an entry is removed from the cache,
+and the removalListeners map holds the listeners to be called.
 
 
 Tests cover the basic functionality of the CacheService class,
@@ -6,3 +27,5 @@ including adding and retrieving entries, evicting expired entries,
 using removal listeners, and obtaining cache statistics.
 
 !Note that the testEviction test case includes a 10-second
+
+________________________________________________________________________
