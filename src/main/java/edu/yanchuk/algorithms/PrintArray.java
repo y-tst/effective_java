@@ -20,7 +20,7 @@ public class PrintArray {
             System.out.print(unsortedIntArray[i] + " ");
         }
     }
-    public static void printSortedArray(int[] arrayToPrint) {
+    public static void printArray(int[] arrayToPrint) {
 
         System.out.println("Sorted array:");
 
