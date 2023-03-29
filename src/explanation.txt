@@ -1,5 +1,4 @@
 ***********************************************************************
-
 The CacheService class includes two methods:
 get and put for retrieving and adding entries respectively.
 It also schedules the eviction of expired entries in the background
@@ -11,21 +10,58 @@ and the average time spent putting new entries into the cache.
 These are implemented using the evictions and totalPutTime AtomicInteger
 and AtomicLong fields respectively.
 
-************************************************************************
-
-________________________________________________________________________
-
 The cache service also supports the addition and removal
 of removal listeners using the addRemovalListener
 and removeRemovalListener methods.
 These listeners are called when an entry is removed from the cache,
 and the removalListeners map holds the listeners to be called.
-
+________________________________________________________________________
 
 Tests cover the basic functionality of the CacheService class,
 including adding and retrieving entries, evicting expired entries,
 using removal listeners, and obtaining cache statistics.
 
 !Note that the testEviction test case includes a 10-second
+************************************************************************
 
+
+************************************************************************
+Guava Cache Service:
+
+The CacheStats class is nested inside the GuavaCacheService class,
+and tracks the following statistics:
+
+    hits: the number of cache hits
+    misses: the number of cache misses
+    totalLoadTime: the total time (in milliseconds) it took to load items into the cache
+    loadCount: the number of times an item was loaded into the cache
+
+The CacheStats class also includes methods to record cache hits, misses, and load times,
+and to retrieve the cached statistics.
+
+The put() and get() methods have been updated to record cache hits, misses,
+and load times using the CacheStats class. The removalListener
 ________________________________________________________________________
+
+Tests:
+
+The setUp method is used to create an instance of the GuavaCacheService class
+with a max idle time of 10 seconds and a removal listener that does nothing for now.
+
+The testPutAndGet method tests that we can put a value into the cache
+and retrieve it later using the same key.
+
+The testGetNonExistentKey method tests that attempting to retrieve a value
+with a key that does not exist in the cache returns null.
+
+The testPutUpdatesExistingValue method tests that putting a value into the cache
+with a key that already exists updates the existing value.
+
+The testCacheEviction method tests that entries in the cache are evicted
+after their max idle time has elapsed.
+
+The testCacheStatistics method tests that the cache statistics
+are being tracked correctly, by putting two values into the cache
+and retrieving one of them, then checking the load count
+and total load time in the cache statistics.
+************************************************************************
